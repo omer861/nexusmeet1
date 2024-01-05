@@ -241,7 +241,7 @@
                 "id":50
             };
             $.ajax({
-                url: "http://localhost:8082/add",
+                url: "https://nexusmeet.labyrinthglobalsolutions.com/add",
                 data: JSON.stringify(formData),
                 header:{
                     "Authorization":jwt,
@@ -318,7 +318,7 @@
                 'jwt':jwt
             };
             $.ajax({
-                url: "http://localhost:8082/get-meet-by-email",
+                url: "https://nexusmeet.labyrinthglobalsolutions.com/get-meet-by-email",
                 data: JSON.stringify(formData),
                 header:{
                     "Authorization":jwt,
@@ -396,7 +396,7 @@
                 'id':meeting_id,
             };
             $.ajax({
-                url: "http://localhost:8082/get-meet-details",
+                url: "https://nexusmeet.labyrinthglobalsolutions.com/get-meet-details",
                 data: JSON.stringify(formData),
                 header:{
                     "Authorization":jwt,
@@ -435,7 +435,7 @@
                 'id':meeting_id,
             };
             $.ajax({
-                url: "http://localhost:8082/update-meeting",
+                url: "https://nexusmeet.labyrinthglobalsolutions.com/update-meeting",
                 data: JSON.stringify(formData),
                 header:{
                     "Authorization":jwt,
@@ -466,7 +466,7 @@
             };
             $("#meeting_id_attendees").val(meeting_id);
             $.ajax({
-                url: "http://localhost:8082/get-meet-attendees",
+                url: "https://nexusmeet.labyrinthglobalsolutions.com/get-meet-attendees",
                 data: JSON.stringify(formData),
                 header:{
                     "Authorization":jwt,
@@ -506,7 +506,7 @@
                 'id':id,
             };
             $.ajax({
-                url: "http://localhost:8082/remove-attendees",
+                url: "https://nexusmeet.labyrinthglobalsolutions.com/remove-attendees",
                 data: JSON.stringify(formData),
                 header:{
                     "Authorization":jwt,
@@ -537,7 +537,7 @@
                 'meeting_id':meeting_id
             };
             $.ajax({
-                url: "http://localhost:8082/add-attendees",
+                url: "https://nexusmeet.labyrinthglobalsolutions.com/add-attendees",
                 data: JSON.stringify(formData),
                 header:{
                     "Authorization":jwt,
@@ -572,7 +572,7 @@
             }
 
             $.ajax({
-                url: "http://localhost:8082/cancel",
+                url: "https://nexusmeet.labyrinthglobalsolutions.com/cancel",
                 data: JSON.stringify(formData),
                 header:{
                     "Authorization":jwt,
