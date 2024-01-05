@@ -52,7 +52,7 @@
 
 
             $.ajax({
-                url:"https://nexusmeet.labyrinthglobalsolutions.com/get-meeting-id",
+                url:"https://nexusmeet.gatherhub.in/get-meeting-id",
                 data: JSON.stringify(formData),
                 header:{
                     "Content-Type":"application/json",
@@ -74,7 +74,7 @@
                             "meeting_id":meeting_id,
                         };
                         $.ajax({
-                            url:"https://nexusmeet.labyrinthglobalsolutions.com/check-meet-email",
+                            url:"https://nexusmeet.gatherhub.in/check-meet-email",
                             data: JSON.stringify(formData1),
                             header:{
                                 "Content-Type":"application/json",
