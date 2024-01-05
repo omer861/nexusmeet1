@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="./custom.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+
+
+</body>
+<script
+        src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+        crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js" integrity="sha512-3j3VU6WC5rPQB4Ld1jnLV7Kd5xr+cq9avvhwqzbH/taCRNURoeEpoPBK9pDyeukwSxwRPJ8fDgvYXd6SkaZ2TA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script>
+    $(document).ready(function(){
+        if(!$.cookie('jwt')){
+            location.href="/signin.html";
+        }
+    });
+
+    window.onload = function () {
+        function getUrlParams(url) {
+            let urlStr = url.split('?')[1];
+            const urlSearchParams = new URLSearchParams(urlStr);
+            const result = Object.fromEntries(urlSearchParams.entries());
+            return result;
+        }
+
+
+        const roomID = getUrlParams(window.location.href)['roomID'];
+
+        if(roomID != ""){
+
+            var check_email_exits = false;
+            var meeting_id = '';
+            var check_room_exits = false;
+
+            var email = $.cookie('email');
+            var jwt = $.cookie('jwt');
+
+            var formData = {
+                "room_id":roomID
+            };
+
+            console.log(roomID);
+
+
+            $.ajax({
+                url:"http://localhost:8082/get-meeting-id",
+                data: JSON.stringify(formData),
+                header:{
+                    "Content-Type":"application/json",
+                    "Authorization":jwt,
+                },
+                processData: false,
+                contentType: "application/json",
+                type: 'POST',
+                dataType: "json",
+                success: function (data) {
+                    console.log(data);
+                    if(data['id'] != ''){
+                        meeting_id = data['id'];
+                        console.log(meeting_id);
+                        check_room_exits = true;
+
+                        var formData1 = {
+                            "email":email,
+                            "meeting_id":meeting_id,
+                        };
+                        $.ajax({
+                            url:"http://localhost:8082/check-meet-email",
+                            data: JSON.stringify(formData1),
+                            header:{
+                                "Content-Type":"application/json",
+                                "Authorization":jwt,
+                            },
+                            processData: false,
+                            contentType: "application/json",
+                            type: 'POST',
+                            dataType: "json",
+                            success: function (data) {
+                                console.log(data);
+
+                                if (data['id'] != '') {
+
+                                    const userID = Math.floor(Math.random() * 10000) + "";
+                                    const userName = getUrlParams(window.location.href)['username'] || "userName" + userID;
+                                    const appID = 1893360204; // check the video on my https://youtube.con/@boualiali
+                                    const serverSecret = "de756d96232842f8a7ad26d980a4e573"; // check the video on my https://youtube.con/@boualiali
+                                    const kitToken = ZegoUIKitPrebuilt.generateKitTokenForTest(appID, serverSecret, roomID, userID, userName);
+
+
+                                    const zp = ZegoUIKitPrebuilt.create(kitToken);
+                                    zp.joinRoom({
+                                        container: document.querySelector("#root"),
+                                        sharedLinks: [{
+                                            name: 'Personal link',
+                                            url: window.location.protocol + '//' + window.location.host + window.location.pathname + '?roomID=' + roomID,
+                                        }],
+                                        scenario: {
+                                            mode: ZegoUIKitPrebuilt.VideoConference,
+                                        },
+
+                                        turnOnMicrophoneWhenJoining: false,
+                                        turnOnCameraWhenJoining: false,
+                                        showMyCameraToggleButton: true,
+                                        showMyMicrophoneToggleButton: true,
+                                        showAudioVideoSettingsButton: true,
+                                        showScreenSharingButton: true,
+                                        showTextChat: true,
+                                        showUserList: true,
+                                        maxUsers: 500,
+                                        layout: "Auto",
+                                        showLayoutButton: false,
+
+                                    });
+
+                                }else{
+                                    location.href="/signin.html";
+                                }
+
+                            }, error: function (data) {
+                                console.log(data);
+                            }
+
+                        })
+
+                    }else{
+                        location.href="/signin.html";
+                    }
+                }, error: function (data) {
+                    console.log(data);
+                }
+
+            })
+
+
+        }else{
+            location.href="/signin.html";
+        }
+    }
+</script>
+<script src="https://unpkg.com/@zegocloud/zego-uikit-prebuilt/zego-uikit-prebuilt.js"></script>
+</html>
