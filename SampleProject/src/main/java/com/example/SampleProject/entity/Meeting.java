@@ -26,12 +26,26 @@ public class Meeting {
 
     private String token_id;
 
+    public String getMeetingStatus() {
+        return meetingStatus;
+    }
 
+    public void setMeetingStatus(String meetingStatus) {
+        this.meetingStatus = meetingStatus;
+    }
 
+    @Column(name = "meeting_status")
+    private String meetingStatus;
 
+    public String getRoomId() {
+        return roomId;
+    }
 
+    public void setRoomId(String roomId) {
+        this.roomId = roomId;
+    }
 
-   @Transient
+    @Transient
     private List<String> meeting_attendees;
 
 

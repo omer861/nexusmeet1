@@ -364,12 +364,14 @@
                                             html +='<h1 class="event-name-heading">'+meetDataArr['title']+'</h1>';
                                             html +='<p class="event-details-para">Time: From '+meetDataArr['start_time']+' To '+meetDataArr['end_time']+'</span></p>';
                                             html +='<p class="event-details-para">Agenda: <span class="event-details-span">'+meetDataArr['description']+'</span></p>';
-                                            if(meetDataArr['meeting_status'] == "0"){
+                                            if(meetDataArr['meetingStatus'] == "0"){
                                                 if(meetDateFormatted >= formattedDate){
                                                     html += '<a href="/join-meet.html?roomID='+meetDataArr['room_id']+'" class="btn btn-info btn-sm">Join</a>';
                                                     html += ' <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#meetingAttendeesModal" onclick="getMeetingAttendees('+meetDataArr["id"]+')">+/- Attendees</button>';
                                                     html += ' <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#editMeetingModal" onclick="getMeetingDetails('+meetDataArr["id"]+')"><i class="fa fa-edit"></i></button>';
                                                     html += ' <button type="button" class="btn btn-sm btn-danger" onclick="deleteMeeting('+meetDataArr["id"]+')"><i class="fa fa-trash"></i></button>';
+                                                }else{
+                                                    html += '<span class="badge bg-success" style="width:100%;">Completed</span>';
                                                 }
                                             }else{
                                                 html += '<span class="badge bg-danger" style="width:100%;">Cancelled</span>';
