@@ -30,7 +30,7 @@ public class WebSecurityConfiguration {
         return httpSecurity
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/","/sign-up","/authenticate","/add", "/get-meeting-id", "check-meet-email", "/get-meet-by-email","/get-meet-details", "/update-meeting", "/get-meet-attendees", "/remove-attendees", "/add-attendees", "/index.html", "/signup.html", "signin.html","join-meet.html", "dashboard.html","/custom.css","/custom.js", "/css/*", "/js/*", "/images/*", "/images/avatar/*", "/images/highlight/*", "/images/schedule/*", "/videos/*", "/fonts/*", "/images/loader.gif").permitAll()
+                        .requestMatchers("/", "/sign-up", "/authenticate","/add", "/get-meeting-id", "check-meet-email", "/get-meet-by-email","/get-meet-details", "/update-meeting", "/get-meet-attendees", "/remove-attendees", "/add-attendees", "/index.html", "/signup.html", "signin.html","join-meet.html", "dashboard.html","/custom.css","/custom.js", "/css/*", "/js/*", "/images/*", "/images/avatar/*", "/images/highlight/*", "/images/schedule/*", "/videos/*", "/fonts/*", "/images/loader.gif").permitAll()
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
