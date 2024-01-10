@@ -186,7 +186,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js" integrity="sha512-GWzVrcGlo0TxTRvz9ttioyYJ+Wwk9Ck0G81D+eO63BaqHaJ3YZX9wuqjwgfcV/MrB2PhaVX9DkYVhbFpStnqpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
+<script src="./custom.js"></script>
 <script>
 
     function hideLoader(){
@@ -244,7 +244,7 @@
                 "id":50
             };
             $.ajax({
-                url: "http://localhost:8082/add",
+                url: base_url + "add",
                 data: JSON.stringify(formData),
                 header:{
                     "Authorization":jwt,
@@ -325,7 +325,7 @@
                 'jwt':jwt
             };
             $.ajax({
-                url: "http://localhost:8082/get-meet-by-email",
+                url: base_url + "get-meet-by-email",
                 data: JSON.stringify(formData),
                 header:{
                     "Authorization":jwt,
@@ -406,7 +406,7 @@
                 'id':meeting_id,
             };
             $.ajax({
-                url: "http://localhost:8082/get-meet-details",
+                url: base_url + "get-meet-details",
                 data: JSON.stringify(formData),
                 header:{
                     "Authorization":jwt,
@@ -445,7 +445,7 @@
                 'id':meeting_id,
             };
             $.ajax({
-                url: "http://localhost:8082/update-meeting",
+                url: base_url + "update-meeting",
                 data: JSON.stringify(formData),
                 header:{
                     "Authorization":jwt,
@@ -476,7 +476,7 @@
             };
             $("#meeting_id_attendees").val(meeting_id);
             $.ajax({
-                url: "http://localhost:8082/get-meet-attendees",
+                url: base_url + "get-meet-attendees",
                 data: JSON.stringify(formData),
                 header:{
                     "Authorization":jwt,
@@ -516,7 +516,7 @@
                 'id':id,
             };
             $.ajax({
-                url: "http://localhost:8082/remove-attendees",
+                url: base_url + "remove-attendees",
                 data: JSON.stringify(formData),
                 header:{
                     "Authorization":jwt,
@@ -547,7 +547,7 @@
                 'meeting_id':meeting_id
             };
             $.ajax({
-                url: "http://localhost:8082/add-attendees",
+                url: base_url + "add-attendees",
                 data: JSON.stringify(formData),
                 header:{
                     "Authorization":jwt,
@@ -582,7 +582,7 @@
             }
 
             $.ajax({
-                url: "http://localhost:8082/cancel",
+                url: base_url + "cancel",
                 data: JSON.stringify(formData),
                 header:{
                     "Authorization":jwt,

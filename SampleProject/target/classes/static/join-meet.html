@@ -16,7 +16,7 @@
         crossorigin="anonymous"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js" integrity="sha512-3j3VU6WC5rPQB4Ld1jnLV7Kd5xr+cq9avvhwqzbH/taCRNURoeEpoPBK9pDyeukwSxwRPJ8fDgvYXd6SkaZ2TA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
+<script src="./custom.js"></script>
 <script>
     $(document).ready(function(){
         if(!$.cookie('jwt')){
@@ -52,7 +52,7 @@
 
 
             $.ajax({
-                url:"http://localhost:8082/get-meeting-id",
+                url:base_url + "get-meeting-id",
                 data: JSON.stringify(formData),
                 header:{
                     "Content-Type":"application/json",
@@ -74,7 +74,7 @@
                             "meeting_id":meeting_id,
                         };
                         $.ajax({
-                            url:"http://localhost:8082/check-meet-email",
+                            url:base_url + "check-meet-email",
                             data: JSON.stringify(formData1),
                             header:{
                                 "Content-Type":"application/json",

@@ -180,6 +180,8 @@
 <script src="./js/jquery.sticky.js"></script>
 <script src="./js/click-scroll.js"></script>
 <script src="./js/custom.js"></script>
+<script src="./custom.js"></script>
+
 
 <script
         src="https://code.jquery.com/jquery-3.7.1.min.js"
@@ -216,7 +218,7 @@
             'password':$("#password").val(),
         };
         $.ajax({
-            url: "http://localhost:8082/authenticate",
+            url: base_url + "authenticate",
             data: JSON.stringify(formData),
             header:{
                 "Content-Type":"application/json"
