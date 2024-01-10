@@ -7,7 +7,9 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Leadership Event HTML5 Bootstrap v5 Template</title>
+    <title>
+        Nexusmeet
+    </title>
 
     <!-- CSS FILES -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -23,14 +25,11 @@
     <link href="./css/templatemo-leadership-event.css" rel="stylesheet">
 
     <link rel="stylesheet" href="./custom.css">
+    <link rel="stylesheet" href="./fonts/material-design-iconic-font/css/material-design-iconic-font.min.css">
 
-    <!--
+    <!-- STYLE CSS -->
+    <link rel="stylesheet" href="./css/style.css">
 
-    TemplateMo 575 Leadership Event
-
-    https://templatemo.com/tm-575-leadership-event
-
-    -->
 </head>
 
 <body>
@@ -83,53 +82,37 @@
 <main>
 
     <section class="about section-padding">
-        <div class="container">
-            <div class="row">
-                <div class="logo-container col col-md-6">
-                    <img src="./images/bg-logo.PNG" alt="Frame" class="login-side-image" />
-                </div>
-                <div class="form-container col col-md-6">
-                    <form class="form-fields-container" id="signupForm">
-                        <div class="form-group mt-2">
-                            <label class="control-label">UserName</label>
-                            <input required type="text" id="username" name="username" placeholder="User Name" class="form-control" />
-                        </div>
-                        <div class="form-group mt-2">
-                            <label class="control-label">Email ID</label>
-                            <input required type="email" id="emailid" name="email" placeholder="Email ID" class="form-control" />
-                        </div>
-                        <div class="form-group mt-2">
-                            <label class="control-label">Password</label>
-                            <input required type="password" id="password" name="password" placeholder="Password" class="form-control" />
-                        </div>
-                        <div class="form-group mt-2">
-                            <label class="control-label">Confirm Password</label>
-                            <input required type="password" id="confirmPassword" placeholder="Confirm Password" class="form-control" />
-                        </div>
-                        <div class="checkbox-container">
-                            <input type="checkbox" id="termsCheckbox" class="i-box"/>
-                            <p>
-                                I agree to the
-                                <a class="terms-style">terms & conditions</a> and
-                                <a class="terms-style">Privacy Policy</a>
-                            </p>
-                        </div>
-                        <div class="button">
-                            <button class="sign-up-button" type="submit">
-                                Sign Up
-                            </button>
-                        </div>
-                        <p class="signin-paragraph">
-                            Already registered?
-                            <a href="signin-old.html" to="/signin" class="signin-style">
-                                SignIn
-                            </a>
-                        </p>
-                    </form>
-
-
-                </div>
+        <div class="wrapper">
+            <div class="image-holder">
+                <img src="./images/registration-form-8.jpg" alt="">
             </div>
+            <div class="form-inner">
+                <form id="signupForm">
+                    <div class="form-header">
+                        <h3 style="color:#fff">Sign up</h3>
+                        <img src="./images/sign-up.png" alt="" class="sign-up-icon">
+                    </div>
+                    <div class="form-group">
+                        <label for="">Username:</label>
+                        <input type="text" class="form-control" data-validation="length alphanumeric" data-validation-length="3-12" id="username">
+                    </div>
+                    <div class="form-group">
+                        <label for="">E-mail:</label>
+                        <input type="text" class="form-control" data-validation="email"  id="emailid">
+                    </div>
+                    <div class="form-group" >
+                        <label for="">Password:</label>
+                        <input type="password" class="form-control" data-validation="length" data-validation-length="min8" id="password">
+                    </div>
+
+                    <div class="form-group" >
+                        <label for="">  Confirm  Password:</label>
+                        <input type="password" class="form-control" data-validation="length" data-validation-length="min8"  id="confirmPassword">
+                    </div>
+                    <button>create my account</button>
+                </form>
+            </div>
+
         </div>
 
     </section>
@@ -137,53 +120,68 @@
 
 </main>
 
-<footer class="site-footer">
+<footer class="signin-site-footer">
     <div class="container">
         <div class="row align-items-center">
 
-            <div class="col-lg-12 col-12 border-bottom pb-5 mb-5">
-                <div class="d-flex footer-logo">
-                    <a href="index.html" class="navbar-brand">
-                        <img src="./images/logo.png" class="logo">
-                    </a>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4 col-12">
+                        <ul class="footer-menu d-flex flex-wrap">
+                            <li class="footer-menu-item">
+                                <a href="#" class="footer-menu-link">
+                                    Unlock the power of seamless connection with Gather Hub! Elevate Your communication experience through video, audio, phone, and chat – bringing people closer, no matter the distance. Embrace a world where inspiration knows no bounds, as Gather Hub transforms your conversations into moments that matter. Join us and make every connection a masterpiece.
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-3 col-12">
+                        <div class="copyright-text-wrap d-block align-items-center">
+                            <a href="#" class="footer-menu-link">Contact Info</a>
+                            <p>+91 8919078185</p>
+                            <p>info@labyrinthglobalsolutions</p>
+                            <p>Address: Cyber Space</p>
+                            <p>Building, 5th Floor, Madhapur</p>
+                            <p>Hi-Tech City, 500081</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-12">
+                        <div class="copyright-text-wrap align-items-center">
+                            <ul class="footer-menu d-block" style="float:center;">
+                                <li class="footer-menu-item"><a href="#" class="footer-menu-link">Useful Links</a></li>
+                                <li><a href="#">Support</a></li>
+                                <li><a href="#">Pricing</a></li>
+                                <li><a href="#">Contact Us</a></li>
+                                <li><a href="#">About Us</a></li>
+                                <li><a href="#">Privacy Policy</a></li>
+                                <li><a href="#">Terms & Conditions</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-12">
+                        <div class="copyright-text-wrap align-items-center">
+                            <ul class="social-icon ms-auto d-block float-right">
+                                <li><a href="#" class="social-icon-link bi-facebook"></a></li>
 
-                    <ul class="social-icon ms-auto">
-                        <li><a href="#" class="social-icon-link bi-facebook"></a></li>
+                                <li><a href="#" class="social-icon-link bi-instagram"></a></li>
 
-                        <li><a href="#" class="social-icon-link bi-instagram"></a></li>
+                                <li><a href="#" class="social-icon-link bi-whatsapp"></a></li>
 
-                        <li><a href="#" class="social-icon-link bi-whatsapp"></a></li>
+                                <li><a href="#" class="social-icon-link bi-youtube"></a></li>
+                            </ul>
+                        </div>
+                    </div>
 
-                        <li><a href="#" class="social-icon-link bi-youtube"></a></li>
-                    </ul>
                 </div>
-            </div>
-
-            <div class="col-lg-7 col-12">
-                <ul class="footer-menu d-flex flex-wrap">
-                    <li class="footer-menu-item"><a href="#" class="footer-menu-link">Our Story</a></li>
-
-                    <li class="footer-menu-item"><a href="#" class="footer-menu-link">Code of Conduct</a></li>
-
-                    <li class="footer-menu-item"><a href="#" class="footer-menu-link">Privacy and Terms</a></li>
-
-                    <li class="footer-menu-item"><a href="#" class="footer-menu-link">Contact</a></li>
-                </ul>
-            </div>
-
-
-            <div class="col-lg-5 col-12 ms-lg-auto">
-                <div class="copyright-text-wrap d-flex align-items-center">
-                    <p class="copyright-text ms-lg-auto me-4 mb-0">Copyright © 2024 Nexus Meet.
-
+                <div class="copyright-text-wrap d-block align-items-center">
+                    <p class="copyright-text ms-lg-auto me-4 mb-0">
+                        Copyright © 2024 Nexus Meet.
                         <br>All Rights Reserved.
-
-                        <br><br>Design: <a title="CSS Templates" rel="sponsored" href="https://labyrinthglobalsolutions.com" target="_blank">Labyrinth Global Solutions</a></p>
-
+                        <br><br>Design: <a title="CSS Templates" rel="sponsored" href="https://labyrinthglobalsolutions.com" target="_blank">Labyrinth Global Solutions</a>
+                    </p>
                     <a href="#section_1" class="bi-arrow-up arrow-icon custom-link"></a>
                 </div>
             </div>
-
         </div>
     </div>
 </footer>
@@ -231,7 +229,7 @@
             'password':$("#password").val(),
         };
         $.ajax({
-            url: "https://nexusmeet.gatherhub.in/sign-up",
+            url: "http://localhost:8082/sign-up",
             data: JSON.stringify(formData),
             header:{
                 "Content-Type":"application/json"

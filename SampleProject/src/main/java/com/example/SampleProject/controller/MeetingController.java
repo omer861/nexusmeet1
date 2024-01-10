@@ -49,6 +49,7 @@ public class  MeetingController {
 
         meetingData.setToken_id(token);
         meetingData.setRoom_id(roomId);
+        meetingData.setMeetingStatus(0);
 
         System.out.println(token);
         List<String> meetingAttendees = meetingData.getMeeting_attendees();
@@ -68,15 +69,18 @@ public class  MeetingController {
 
         for (int i = 0; i<meetingAttendeesArr.length;i++){
             String email = String.valueOf(meetingAttendeesArr[i]);
-            int join_status = 0;
-            System.out.println(email);
-            //Object attendee = createJsonObject(email, join_status, meeting_id);
-            MeetingAttendees m = new MeetingAttendees();
-            m.setMeeting_id(meeting_id);
-            m.setEmail(email);
-            m.setJoin_status(join_status);
-             meetingAttendeesRepository.save(m);
-            sendEmail(email, meetingData.getTitle(), meetingData.getDescription(), meetingData.getStart_time(), meetingData.getEnd_time(), meetingData.getMeeting_date());
+            Optional<MeetingAttendees> checkEmail = meetingAttendeesRepository.findByEmailAndMeetingId(email, meeting_id);
+            if(checkEmail.isEmpty()) {
+                int join_status = 0;
+                System.out.println(email);
+                //Object attendee = createJsonObject(email, join_status, meeting_id);
+                MeetingAttendees m = new MeetingAttendees();
+                m.setMeeting_id(meeting_id);
+                m.setEmail(email);
+                m.setJoin_status(join_status);
+                meetingAttendeesRepository.save(m);
+                sendEmail(email, meetingData.getTitle(), meetingData.getDescription(), meetingData.getStart_time(), meetingData.getEnd_time(), meetingData.getMeeting_date());
+            }
         }
     }
 

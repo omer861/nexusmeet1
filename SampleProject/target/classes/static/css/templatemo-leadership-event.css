@@ -13,11 +13,11 @@ https://templatemo.com/tm-575-leadership-event
 :root {
   --white-color:                  #ffffff;
   --primary-color:                #0dcaf0;
-  --secondary-color:              #0d6efd;
+  --secondary-color:              #007b8c;
   --section-bg-color:             #f0f8ff;
   --dark-color:                   #000000;
   --navbar-bg-color:              #273053;
-  --p-color:                      #717275;
+  --p-color:                      #fff;
   --highlight-icon-color:         #ff0100;
 
   --body-font-family:             'DM Sans', sans-serif;
@@ -131,7 +131,7 @@ a:hover {
 }
 
 .section-padding {
-  padding-top: 120px;
+  padding-top: 0px;
   padding-bottom: 120px;
 }
 
@@ -526,9 +526,7 @@ strong {
   padding: 10px 20px;
 }
 
-.date-text {
-  border-right: 0;
-}
+
 
 
 /*---------------------------------------
@@ -738,6 +736,7 @@ strong {
   border-radius: 20px;
   position: relative;
   overflow: hidden;
+  min-height:485px;
 }
 
 .pricing-title-wrap,
@@ -905,8 +904,9 @@ strong {
 
 .social-icon li {
   list-style: none;
-  display: inline-block;
+  display: block;
   vertical-align: top;
+  line-height:3;
 }
 
 .social-icon-link {

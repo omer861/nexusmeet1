@@ -26,16 +26,20 @@ public class Meeting {
 
     private String token_id;
 
-    public String getMeetingStatus() {
+
+    @Transient
+    private List<String> meeting_attendees;
+
+    @Column(name = "meeting_status")
+    private Integer meetingStatus;
+
+    public Integer getMeetingStatus() {
         return meetingStatus;
     }
 
-    public void setMeetingStatus(String meetingStatus) {
+    public void setMeetingStatus(Integer meetingStatus) {
         this.meetingStatus = meetingStatus;
     }
-
-    @Column(name = "meeting_status")
-    private String meetingStatus;
 
     public String getRoomId() {
         return roomId;
@@ -45,8 +49,6 @@ public class Meeting {
         this.roomId = roomId;
     }
 
-    @Transient
-    private List<String> meeting_attendees;
 
 
     public String getMeeting_date() {

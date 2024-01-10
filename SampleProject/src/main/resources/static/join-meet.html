@@ -52,7 +52,7 @@
 
 
             $.ajax({
-                url:"https://nexusmeet.gatherhub.in/get-meeting-id",
+                url:"http://localhost:8082/get-meeting-id",
                 data: JSON.stringify(formData),
                 header:{
                     "Content-Type":"application/json",
@@ -74,7 +74,7 @@
                             "meeting_id":meeting_id,
                         };
                         $.ajax({
-                            url:"https://nexusmeet.gatherhub.in/check-meet-email",
+                            url:"http://localhost:8082/check-meet-email",
                             data: JSON.stringify(formData1),
                             header:{
                                 "Content-Type":"application/json",
@@ -118,8 +118,25 @@
                                         maxUsers: 500,
                                         layout: "Auto",
                                         showLayoutButton: false,
-
+                                        showRecordingButton: true
                                     });
+
+                                    zp.getInstance().startRecord(roomID, {
+                                            recordMode: 1,  // Single stream recording
+                                            outputParams: {
+                                                outputFileFormat: 'mp4',
+                                                outputFolder: 'record/',
+                                            },
+                                            storageParams: {
+                                                vendor: 2,  // Storage vendor (e.g., 2 for OSS)
+                                                region: 'oss',
+                                                bucket: '',
+                                                accessKeyId: 1893360204,
+                                                accessKeySecret: de756d96232842f8a7ad26d980a4e573,
+                                            },
+                                    });
+
+
 
                                 }else{
                                     location.href="/signin.html";

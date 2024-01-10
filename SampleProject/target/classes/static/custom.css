@@ -135,7 +135,7 @@ ul {
     background-color: #4c32a8;
     height: 50px;
     width: 90%;
-    color: #ffffff;
+    color: primary color;
     font-size: 20px;
     font-weight: 500;
     font-family: "Roboto";
@@ -430,7 +430,7 @@ ul {
 
   }
   .new-metting-button {
-      background-color: #4c32a8;
+      background-color: #273053;
       height: 40px;
       width: 130px;
       color: #ffffff;
@@ -596,10 +596,11 @@ ul {
 
 
     nav {
-        background-color: #4c32a8;
+        background-color: #273053;
         display: flex;
         justify-content: space-between;
         align-items: center;
+        padding:10px;
     }
 
     li {
@@ -631,4 +632,62 @@ ul {
 
     .logo{
         width:120px;
+
     }
+
+     @media screen and (min-width: 1400px) {
+          .footer-container {
+              max-weight:1650px
+          }
+
+           @media screen and (min-width: 1400px) {
+                   .signin-site-footer {
+                       max-weight:1650px
+                   }
+
+        .footer2-site-footer{
+        background:#273053;
+        }
+
+
+        .signin-site-footer{
+        background:#273053;
+        }
+        .landing-site-footer{
+        background:#273053;
+        }
+        .nexus-button{
+        background-color: #273053;
+        color:#ffffff;
+        padding:12px;
+        font-size:20px;
+        border-radius:10px;
+        }
+        .subheading{
+        color:black;
+
+        }
+        .priceplan{
+        color:black;
+        }
+        .priceplan{
+        color:black;
+        }
+        .subheadingprice{
+        color:black;
+        }
+        .image-loader{
+          display: grid;
+          position: absolute;
+          width: 96%;
+          z-index: 100;
+          height: 100%;
+          background: #5a5a5aab;
+        }
+
+        .loader-img{
+          width: 188px;
+          display: block;
+          margin: auto;
+        }
+

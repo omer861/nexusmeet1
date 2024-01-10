@@ -13,14 +13,14 @@
         <img src="./images/logo.png" class="logo">
     </h1>
     <ul>
-        <li><a id="userName">Welcome :</a></li>
-        <li>Support</li>
+        <li><img src="./images/profile.png" style="width:45px;"></li>
+        <li id="show_email"></li>
     </ul>
 </nav>
-<div class="container">
+<div class="container" style="margin-top:20px;">
     <div class="row">
         <div class="col-12 text-right" style="text-align: right;">
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalLong">
+            <button type="button" class="nexus-button" data-bs-toggle="modal" data-bs-target="#exampleModalLong">
                 New Meeting
             </button>
         </div>
@@ -208,7 +208,9 @@
                 position: position,
                 showConfirmButton: false,
                 timerProgressBar: false,
-                background: background
+                background: background,
+                timer: 2000
+
             })
 
             Toast.fire({
@@ -222,6 +224,7 @@
                 location.href="/signin.html";
             }
             getMeetings();
+            $("#show_email").html($.cookie('email'));
         });
         var member_attendees = [$.cookie('email')];
         $(document).on("click","#meetingButton",function(event){
@@ -241,7 +244,7 @@
                 "id":50
             };
             $.ajax({
-                url: "https://nexusmeet.gatherhub.in/add",
+                url: "http://localhost:8082/add",
                 data: JSON.stringify(formData),
                 header:{
                     "Authorization":jwt,
@@ -252,16 +255,20 @@
                 type: 'POST',
                 dataType: "json",
                 success: function (data) {
+                    $('#emailList').html("");
                     $("#image-loader-add").css("display","none");
                     getMeetings();
                     toastFire('success','Meeting Scheduled', 'top-right');
-
-
+                    $('#meetingForm')[0].reset();
+                    member_attendees = [];
                    $('#exampleModalLong').toggle('hide');
                      $('body').removeClass('modal-open');
                     $('.modal-backdrop').remove();
                    console.log(data);
                 }, error: function (data) {
+                    member_attendees = [];
+                    $('#emailList').html("");
+                     $('#meetingForm')[0].reset();
 
                      $('#exampleModalLong').toggle('hide');
                      $('body').removeClass('modal-open');
@@ -318,7 +325,7 @@
                 'jwt':jwt
             };
             $.ajax({
-                url: "https://nexusmeet.gatherhub.in/get-meet-by-email",
+                url: "http://localhost:8082/get-meet-by-email",
                 data: JSON.stringify(formData),
                 header:{
                     "Authorization":jwt,
@@ -331,55 +338,56 @@
                 success: function (data) {
                     const currentDate = new Date();
                     const formattedDate = currentDate.toISOString().split('T')[0];
-
+                    console.log(data);
                     var html = '';
                     for(var i = 0;i<data.length;i++){
                         var meetDataArr = data[i];
+                        console.log(meetDataArr['meetingStatus']);
+                        if(meetDataArr['title'] != ""){
+                            var meetDate = new Date(meetDataArr['meeting_date']);
+                            var meetDateFormatted = meetDate.toISOString().split('T')[0];
 
-                        var meetDate = new Date(meetDataArr['meeting_date']);
-                        var meetDateFormatted = meetDate.toISOString().split('T')[0];
-
-                        var dayOfWeek = meetDate.toLocaleDateString('en-US', { weekday: 'long' });
-                        var monthOfWeek = meetDate.toLocaleDateString('en-US', { month: 'long' });
-                        var day = meetDate.getDate();
+                            var dayOfWeek = meetDate.toLocaleDateString('en-US', { weekday: 'long' });
+                            var monthOfWeek = meetDate.toLocaleDateString('en-US', { month: 'long' });
+                            var day = meetDate.getDate();
 
 
-                        html += '<div class="col-md-4 col-sm-6 col-12 calendar-box-outer">';
-                                html += '<div class="row calendar-box-shadow">';
-                                    html += '<div class="col col-4">';
-                                        html += '<div class="calender">';
-                                            html +='<div class="calender-details">';
-                                               html +=' <div class="calender-item">';
-                                                    html +='<p class="month">'+monthOfWeek+'</p>';
-                                                html +='</div>';
-                                                html +='<div class="day-date-container">';
-                                                    html +='<h2 class="date">'+day+'</h2>';
-                                                    html +='<hr>';
-                                                    html +='<h2 class="day">'+dayOfWeek+'</h2>';
+                            html += '<div class="col-md-4 col-sm-6 col-12 calendar-box-outer">';
+                                    html += '<div class="row calendar-box-shadow">';
+                                        html += '<div class="col col-4">';
+                                            html += '<div class="calender">';
+                                                html +='<div class="calender-details">';
+                                                   html +=' <div class="calender-item">';
+                                                        html +='<p class="month">'+monthOfWeek+'</p>';
+                                                    html +='</div>';
+                                                    html +='<div class="day-date-container">';
+                                                        html +='<h2 class="date">'+day+'</h2>';
+                                                        html +='<hr>';
+                                                        html +='<h2 class="day">'+dayOfWeek+'</h2>';
+                                                    html +='</div>';
                                                 html +='</div>';
                                             html +='</div>';
                                         html +='</div>';
-                                    html +='</div>';
-                                    html +='<div class="col col-8">';
-                                            html +='<h1 class="event-name-heading">'+meetDataArr['title']+'</h1>';
-                                            html +='<p class="event-details-para">Time: From '+meetDataArr['start_time']+' To '+meetDataArr['end_time']+'</span></p>';
-                                            html +='<p class="event-details-para">Agenda: <span class="event-details-span">'+meetDataArr['description']+'</span></p>';
-                                            if(meetDataArr['meetingStatus'] == "0"){
-                                                if(meetDateFormatted >= formattedDate){
-                                                    html += '<a href="/join-meet.html?roomID='+meetDataArr['room_id']+'" class="btn btn-info btn-sm">Join</a>';
-                                                    html += ' <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#meetingAttendeesModal" onclick="getMeetingAttendees('+meetDataArr["id"]+')">+/- Attendees</button>';
-                                                    html += ' <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#editMeetingModal" onclick="getMeetingDetails('+meetDataArr["id"]+')"><i class="fa fa-edit"></i></button>';
-                                                    html += ' <button type="button" class="btn btn-sm btn-danger" onclick="deleteMeeting('+meetDataArr["id"]+')"><i class="fa fa-trash"></i></button>';
+                                        html +='<div class="col col-8">';
+                                                html +='<h1 class="event-name-heading">'+meetDataArr['title']+'</h1>';
+                                                html +='<p class="event-details-para">Time: From '+meetDataArr['start_time']+' To '+meetDataArr['end_time']+'</span></p>';
+                                                html +='<p class="event-details-para">Agenda: <span class="event-details-span">'+meetDataArr['description']+'</span></p>';
+                                                if(meetDataArr['meetingStatus'] == 0){
+                                                    if(meetDateFormatted >= formattedDate){
+                                                        html += '<a href="/join-meet.html?roomID='+meetDataArr['room_id']+'" class="btn btn-info btn-sm">Join</a>';
+                                                        html += ' <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#meetingAttendeesModal" onclick="getMeetingAttendees('+meetDataArr["id"]+')">+/- Attendees</button>';
+                                                        html += ' <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#editMeetingModal" onclick="getMeetingDetails('+meetDataArr["id"]+')"><i class="fa fa-edit"></i></button>';
+                                                        html += ' <button type="button" class="btn btn-sm btn-danger" onclick="deleteMeeting('+meetDataArr["id"]+')"><i class="fa fa-trash"></i></button>';
+                                                    }else{
+                                                        html += '<span class="badge bg-success" style="width:100%;">Completed</span>';
+                                                    }
                                                 }else{
-                                                    html += '<span class="badge bg-success" style="width:100%;">Completed</span>';
+                                                    html += '<span class="badge bg-danger" style="width:100%;">Cancelled</span>';
                                                 }
-                                            }else{
-                                                html += '<span class="badge bg-danger" style="width:100%;">Cancelled</span>';
-                                            }
+                                        html +='</div>';
                                     html +='</div>';
                                 html +='</div>';
-                            html +='</div>';
-
+                        }
                     }
 
                     $("#meetingsList").html(html);
@@ -398,7 +406,7 @@
                 'id':meeting_id,
             };
             $.ajax({
-                url: "https://nexusmeet.gatherhub.in/get-meet-details",
+                url: "http://localhost:8082/get-meet-details",
                 data: JSON.stringify(formData),
                 header:{
                     "Authorization":jwt,
@@ -437,7 +445,7 @@
                 'id':meeting_id,
             };
             $.ajax({
-                url: "https://nexusmeet.gatherhub.in/update-meeting",
+                url: "http://localhost:8082/update-meeting",
                 data: JSON.stringify(formData),
                 header:{
                     "Authorization":jwt,
@@ -468,7 +476,7 @@
             };
             $("#meeting_id_attendees").val(meeting_id);
             $.ajax({
-                url: "https://nexusmeet.gatherhub.in/get-meet-attendees",
+                url: "http://localhost:8082/get-meet-attendees",
                 data: JSON.stringify(formData),
                 header:{
                     "Authorization":jwt,
@@ -508,7 +516,7 @@
                 'id':id,
             };
             $.ajax({
-                url: "https://nexusmeet.gatherhub.in/remove-attendees",
+                url: "http://localhost:8082/remove-attendees",
                 data: JSON.stringify(formData),
                 header:{
                     "Authorization":jwt,
@@ -539,7 +547,7 @@
                 'meeting_id':meeting_id
             };
             $.ajax({
-                url: "https://nexusmeet.gatherhub.in/add-attendees",
+                url: "http://localhost:8082/add-attendees",
                 data: JSON.stringify(formData),
                 header:{
                     "Authorization":jwt,
@@ -574,7 +582,7 @@
             }
 
             $.ajax({
-                url: "https://nexusmeet.gatherhub.in/cancel",
+                url: "http://localhost:8082/cancel",
                 data: JSON.stringify(formData),
                 header:{
                     "Authorization":jwt,
